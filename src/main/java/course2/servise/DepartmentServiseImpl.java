@@ -46,6 +46,7 @@ public class DepartmentServiseImpl implements DepartmentServise {
 
     @Override
     public Map<Integer, List<Employee>> getAllEmployeesByDepartment() {
-        return null;
+        return employeeService.getAll().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 }
