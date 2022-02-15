@@ -1,7 +1,6 @@
 package course2.servise;
 
 
-
 import course2.Employee;
 import course2.exception.EmployeeExistsException;
 import course2.exception.EmployeeIsNotFoundException;
@@ -14,13 +13,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final Map<String, Employee> employees;
 
+
     public EmployeeServiceImpl() {
         employees = new LinkedHashMap<>();
     }
 
+    private boolean contains(String key) {
+        return employees.containsKey(key);
+    }
+
     @Override
-    public Employee add(String firstName, String lastName,int department,int salary ) {
-            Employee newEmployee = new Employee(firstName, lastName);
+    public Employee add(String firstName, String lastName, int department, int salary) {
+        Employee newEmployee = new Employee(firstName, lastName, department, salary);
         return add(newEmployee);
     }
 
@@ -29,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee add(Employee employee) {
         String key = getKey(employee);
 
-        if (employee.containskey(key)) {
+        if (contains(key)) {
             throw new EmployeeExistsException();
         }
         employees.put(key, employee);
@@ -38,11 +42,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Employee remove(String firstName, String lastName)  {
+    public Employee remove(String firstName, String lastName) {
         Employee newEmployee = new Employee(firstName, lastName);
         return remove(newEmployee);
     }
-
 
 
     @Override
@@ -51,13 +54,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (deletedValue == null) {
             throw new EmployeeIsNotFoundException();
         }
-        return employee;
+        return deletedValue;
     }
 
 
-
     @Override
-    public Employee find(String firstName, String lastName)  {
+    public Employee find(String firstName, String lastName) {
         String key = getKey(firstName, lastName);
         Employee employee = employees.get(key);
         if (employee == null) {

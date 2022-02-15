@@ -9,17 +9,17 @@ public class Employee {
     private int department;
     private int salary;
 
-    public Employee(String firstName,String lastName){
-        this(firstName, lastName,0,0);
+    public Employee(String firstName, String lastName) {
+        this(firstName, lastName, 0, 0);
 
     }
 
-public Employee(String firstName,String lastName, int department, int salary){
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.department = department;
-    this.salary = salary;
-}
+    public Employee(String firstName, String lastName, int department, int salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.salary = salary;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -70,10 +70,6 @@ public Employee(String firstName,String lastName, int department, int salary){
                 ", department=" + department +
                 ", salary=" + salary +
                 '}';
-    }
-
-    public boolean containskey(String key) {
-        return false;
     }
 
 }
